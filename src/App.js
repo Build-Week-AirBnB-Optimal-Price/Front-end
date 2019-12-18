@@ -6,6 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome to our Air BnB Optimizer</h1>
+        <h3>Test 123</h3>
       </header>
     </div>
   );
