@@ -46,5 +46,31 @@ const LoginForm = ({values, errors, touched, status}) => {
             </Form>
         </div>
     )
-
 }
+
+const FormikOnboardForm = withFormik({
+    mapPropsToValues(props) {
+        return {
+            username: props.username || "",
+            password: props.password || "",
+        };
+    },
+    validationSchema: Yup.object().shape({
+        username: Yup.string().required(),
+        password: Yup.string().required(),
+    }),
+
+    handleSubmit(values, {setStatus, resetForm}) {
+        console.log("submitting", values);
+        axios
+        .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
+        .then(res => {
+            console.log("success", res);
+            setStatus(res.data);
+            resetForm();
+        })
+        .catch(err => console.log(err.res));
+    }
+})(LoginForm);
+
+export default FormikLoginForm;
