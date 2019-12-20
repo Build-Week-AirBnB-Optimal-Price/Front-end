@@ -48,7 +48,7 @@ const LoginForm = ({values, errors, touched, status}) => {
     )
 }
 
-const FormikOnboardForm = withFormik({
+const FormikLoginForm = withFormik({
     mapPropsToValues(props) {
         return {
             username: props.username || "",
