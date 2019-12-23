@@ -1,74 +1,151 @@
-// first_name
-// last_name
-// email
-// user_name
+import React, { useState, useEffect } from "react";
+import { withFormik, Form, Field } from "formik";
+import {
+    Col, Row, Button, FormGroup, Label, Input
+} from 'reactstrap';
+import * as Yup from "yup";
+import axios from "axios";
 
-import React, { useState } from 'react';
+const LoginForm = ({ values, errors, touched, status }) => {
+    console.log("values", values);
+    console.log("errors", errors);
+    console.log("touched", touched);
 
+    const [users, setUsers] = useState([]);
 
-const Register = () => {
-    const [register, setRegister] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        user_name: ""
-    })
-
-    const handleChanges = event => {
-        setRegister({ ...register, [event.target.name]: event.target.value })
-    };
-    const addNewRegister = () => {
-        return
-    }
-
-    const submitForm = event => {
-        event.preventDefault();
-        console.log(register.first_name);
-        console.log(register.last_name);
-        console.log(register.email);
-        console.log(register.user_name);
-
-        addNewRegister({ first_name: "", last_name: "", email: "", user_name: "" })
-    }
-    console.log("register state", register);
+    useEffect(() => {
+        console.log("Status has changed!", status);
+        status && setUsers(users => [...users, status]);
+    }, [status]);
 
     return (
-        <form onSubmit={submitForm}>
-            <label htmlFor="first_name">First Name</label>
-            <input
-                id="first_name"
-                type="text"
-                name="first_name"
-                onChange={handleChanges}
-                value={register.first_name}
-            />
-            <label htmlFor="last_name">Last Name</label>
-            <input
-                id="last_name"
-                type="text"
-                name="last_name"
-                onChange={handleChanges}
-                value={register.last_name}
-            />
-            <label htmlFor="email">Email</label>
-            <input
-                id="email"
-                type="text"
-                name="email"
-                onChange={handleChanges}
-                value={register.email}
-            />
-            <label htmlFor="user_name">First Name</label>
-            <input
-                id="user_name"
-                type="text"
-                name="user_name"
-                onChange={handleChanges}
-                value={register.user_name}
-            />
-            <button type="submit">Submit</button>
-        </form>
+        <div className="login-form">
+            <Form>
+                {/* <Field
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                />
+                {touched.first_name && errors.first_name && (
+                    <p className="errors">{errors.first_name}</p>
+                )}
+                <Field
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                />
+                {touched.last_name && errors.last_name && (
+                    <p className="errors">{errors.last_name}</p>
+                )}
+                <Field
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                />
+                {touched.email && errors.email && (
+                    <p className="errors">{errors.email}</p>
+                )}
+                <Field
+                    type="text"
+                    name="user_name"
+                    placeholder="Username"
+                />
+                {touched.username && errors.username && (
+                    <p className="errors">{errors.username}</p>
+                )}
+
+                <button type="submit">Submit</button> */}
+
+                <Row>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="first_name"
+                                placeholder="First Name"
+                            />
+
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="last_name"
+                                placeholder="Last Name"
+                            />
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Field
+                            type="text"
+                            name="email"
+                            placeholder="Email"
+                        />
+                    </Col>
+                </Row>
+                <FormGroup>
+                    <Field
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="exampleAddress2">Address 2</Label>
+                    <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor" />
+                </FormGroup>
+                <Row form>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for="exampleCity">City</Label>
+                            <Input type="text" name="city" id="exampleCity" />
+                        </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                        <FormGroup>
+                            <Label for="exampleState">State</Label>
+                            <Input type="text" name="state" id="exampleState" />
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <Label for="exampleZip">Zip</Label>
+                            <Input type="text" name="zip" id="exampleZip" />
+                        </FormGroup>
+                    </Col>
+                </Row>
+
+            </Form>
+        </div>
     )
 }
 
-export default Register;
+const FormikLoginForm = withFormik({
+    mapPropsToValues(props) {
+        return {
+            username: props.username || "",
+            password: props.password || "",
+        };
+    },
+    validationSchema: Yup.object().shape({
+        username: Yup.string().required(),
+        password: Yup.string().required(),
+    }),
+
+    handleSubmit(values, { setStatus, resetForm }) {
+        console.log("submitting", values);
+        axios
+            .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
+            .then(res => {
+                console.log("success", res);
+                setStatus(res.data);
+                resetForm();
+            })
+            .catch(err => console.log(err.res));
+    }
+})(LoginForm);
+
+export default FormikLoginForm;
