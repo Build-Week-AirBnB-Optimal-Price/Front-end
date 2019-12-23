@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import {
-    Col, Row, Button, FormGroup, Label, Input
+    Container, Col, Row, Button, FormGroup, Label, Input
 } from 'reactstrap';
 import * as Yup from "yup";
 import axios from "axios";
@@ -77,15 +77,19 @@ const LoginForm = ({ values, errors, touched, status }) => {
                         </FormGroup>
                     </Col>
                 </Row>
-                <Row>
-                    <Col md={12}>
-                        <Field
-                            type="text"
-                            name="email"
-                            placeholder="Email"
-                        />
-                    </Col>
-                </Row>
+
+                <Container>
+                    <Row>
+                        <Col>
+                            <Field
+                                type="text"
+                                name="email"
+                                placeholder="Email"
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+
                 <FormGroup>
                     <Field
                         type="text"
@@ -94,7 +98,6 @@ const LoginForm = ({ values, errors, touched, status }) => {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="exampleAddress2">Address 2</Label>
                     <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor" />
                 </FormGroup>
                 <Row form>
