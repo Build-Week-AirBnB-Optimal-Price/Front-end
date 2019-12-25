@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import {
-    Col, Row, Button, FormGroup,
+    Alert, Col, Row, Button, FormGroup,
 } from 'reactstrap';
 import * as Yup from "yup";
 import axios from "axios";
@@ -30,7 +30,9 @@ const LoginForm = ({ values, errors, touched, status }) => {
                                 placeholder="First Name"
                             />
                             {touched.first_name && errors.first_name && (
-                                <p className="errors">{errors.first_name}</p>
+                                <Alert color="danger">
+                                    <p className="errors">{errors.first_name}</p>
+                                </Alert>
                             )}
                         </FormGroup>
                     </Col>
@@ -42,7 +44,9 @@ const LoginForm = ({ values, errors, touched, status }) => {
                                 placeholder="Last Name"
                             />
                             {touched.last_name && errors.last_name && (
-                                <p className="errors">{errors.last_name}</p>
+                                <Alert color="danger">
+                                    <p className="errors">{errors.last_name}</p>
+                                </Alert>
                             )}
                         </FormGroup>
                     </Col>
@@ -56,7 +60,9 @@ const LoginForm = ({ values, errors, touched, status }) => {
                                 placeholder="Email"
                             />
                             {touched.email && errors.email && (
-                                <p className="errors">{errors.email}</p>
+                                <Alert color="danger">
+                                    <p className="errors">{errors.email}</p>
+                                </Alert>
                             )}
                         </FormGroup>
                     </Col>
@@ -68,7 +74,10 @@ const LoginForm = ({ values, errors, touched, status }) => {
                                 placeholder="Username"
                             />
                             {touched.username && errors.username && (
-                                <p className="errors">{errors.username}</p>
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.username}</p>
+                                </Alert>
                             )}
                         </FormGroup>
                     </Col>
