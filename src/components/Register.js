@@ -75,7 +75,7 @@ const LoginForm = ({ values, errors, touched, status }) => {
                 </Row>
                 <Row>
                     <Col>
-                        <Button tpye="submit" outline color="secondary">
+                        <Button tpye="submit" outline color="success">
                             Submit
                     </Button>
                     </Col>
