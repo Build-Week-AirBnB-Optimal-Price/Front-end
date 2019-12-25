@@ -75,12 +75,23 @@ const LoginForm = ({ values, errors, touched, status }) => {
                 </Row>
                 <Row>
                     <Col>
-                        <Button outline color="secondary">
+                        <Button tpye="submit" outline color="secondary">
                             Submit
                     </Button>
                     </Col>
                 </Row>
             </Form>
+
+            {users.map(user => {
+                return (
+                    <ul>
+                        <li>First Name: {user.first_name}</li>
+                        <li>Last Name: {user.last_name}</li>
+                        <li>Email: {user.email}</li>
+                        <li>Username: {user.username}</li>
+                    </ul>
+                )
+            })}
         </div>
     )
 }
@@ -88,19 +99,23 @@ const LoginForm = ({ values, errors, touched, status }) => {
 const FormikLoginForm = withFormik({
     mapPropsToValues(props) {
         return {
+            first_name: props.first_name || "",
+            last_name: props.last_name || "",
+            email: props.email || "",
             username: props.username || "",
-            password: props.password || "",
         };
     },
     validationSchema: Yup.object().shape({
-        username: Yup.string().required(),
-        password: Yup.string().required(),
+        first_name: Yup.string().required(),
+        last_name: Yup.string().required(),
+        email: Yup.string().required(),
+        username: Yup.string().required()
     }),
 
     handleSubmit(values, { setStatus, resetForm }) {
         console.log("submitting", values);
         axios
-            .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
+            .post("https://reqres.in/api/users/", values)
             .then(res => {
                 console.log("success", res);
                 setStatus(res.data);
