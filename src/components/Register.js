@@ -1,74 +1,137 @@
-// first_name
-// last_name
-// email
-// user_name
+import React, { useState, useEffect } from "react";
+import { withFormik, Form, Field } from "formik";
+import {
+    Alert, Col, Row, Button, FormGroup,
+} from 'reactstrap';
+import * as Yup from "yup";
+import axios from "axios";
 
-import React, { useState } from 'react';
+const LoginForm = ({ values, errors, touched, status }) => {
+    console.log("values", values);
+    console.log("errors", errors);
+    console.log("touched", touched);
 
+    const [users, setUsers] = useState([]);
 
-const Register = () => {
-    const [register, setRegister] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        user_name: ""
-    })
-
-    const handleChanges = event => {
-        setRegister({ ...register, [event.target.name]: event.target.value })
-    };
-    const addNewRegister = () => {
-        return
-    }
-
-    const submitForm = event => {
-        event.preventDefault();
-        console.log(register.first_name);
-        console.log(register.last_name);
-        console.log(register.email);
-        console.log(register.user_name);
-
-        addNewRegister({ first_name: "", last_name: "", email: "", user_name: "" })
-    }
-    console.log("register state", register);
+    useEffect(() => {
+        console.log("Status has changed!", status);
+        status && setUsers(users => [...users, status]);
+    }, [status]);
 
     return (
-        <form onSubmit={submitForm}>
-            <label htmlFor="first_name">First Name</label>
-            <input
-                id="first_name"
-                type="text"
-                name="first_name"
-                onChange={handleChanges}
-                value={register.first_name}
-            />
-            <label htmlFor="last_name">Last Name</label>
-            <input
-                id="last_name"
-                type="text"
-                name="last_name"
-                onChange={handleChanges}
-                value={register.last_name}
-            />
-            <label htmlFor="email">Email</label>
-            <input
-                id="email"
-                type="text"
-                name="email"
-                onChange={handleChanges}
-                value={register.email}
-            />
-            <label htmlFor="user_name">First Name</label>
-            <input
-                id="user_name"
-                type="text"
-                name="user_name"
-                onChange={handleChanges}
-                value={register.user_name}
-            />
-            <button type="submit">Submit</button>
-        </form>
+        <div className="login-form">
+            <Form>
+                <Row>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="first_name"
+                                placeholder="First Name"
+                            />
+                            {touched.first_name && errors.first_name && (
+                                <Alert color="danger">
+                                    <p className="errors">{errors.first_name}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="last_name"
+                                placeholder="Last Name"
+                            />
+                            {touched.last_name && errors.last_name && (
+                                <Alert color="danger">
+                                    <p className="errors">{errors.last_name}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                            />
+                            {touched.email && errors.email && (
+                                <Alert color="danger">
+                                    <p className="errors">{errors.email}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                            />
+                            {touched.username && errors.username && (
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.username}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Button tpye="submit" outline color="success">
+                            Submit
+                    </Button>
+                    </Col>
+                </Row>
+            </Form>
+
+            {users.map(user => {
+                return (
+                    <ul>
+                        <li>First Name: {user.first_name}</li>
+                        <li>Last Name: {user.last_name}</li>
+                        <li>Email: {user.email}</li>
+                        <li>Username: {user.username}</li>
+                    </ul>
+                )
+            })}
+        </div>
     )
 }
 
-export default Register;
+const FormikLoginForm = withFormik({
+    mapPropsToValues(props) {
+        return {
+            first_name: props.first_name || "",
+            last_name: props.last_name || "",
+            email: props.email || "",
+            username: props.username || "",
+        };
+    },
+    validationSchema: Yup.object().shape({
+        first_name: Yup.string().required(),
+        last_name: Yup.string().required(),
+        email: Yup.string().required(),
+        username: Yup.string().required()
+    }),
+
+    handleSubmit(values, { setStatus, resetForm }) {
+        console.log("submitting", values);
+        axios
+            .post("https://reqres.in/api/users/", values)
+            .then(res => {
+                console.log("success", res);
+                setStatus(res.data);
+                resetForm();
+            })
+            .catch(err => console.log(err.res));
+    }
+})(LoginForm);
+
+export default FormikLoginForm;

@@ -19,6 +19,7 @@ const LandingPage = props => {
           src="https://image.flaticon.com/icons/png/512/1089/1089317.png"
           height="50"
           width="50"
+          alt=""
         />
         <p>Add a property</p>
       </div>
