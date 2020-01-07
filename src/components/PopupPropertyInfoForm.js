@@ -2,35 +2,34 @@ import React from "react";
 import styled from "styled-components";
 
 const Popup = styled.div`
-  border: 2px solid black;
   width: 100%;
-  height: 100%
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
 `;
 const Inner = styled.div`
-  position: fixed;
+  position: relative;
   max-width: 600px;
-  left: 10%;
-  right: 10%;
+  max-height: 600px;
+  overflow: auto;
+  box-shadow: -2px 13px 33px -1px rgba(0,0,0,0.75);
+  border-radius: 3px;
+  margin: 0 auto;
   top: 15%;
   bottom: 15%;
-  margin: auto;
-  border-radius: 20px;
   background: white;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
   input {
       width: 80%;
-      height: 1.5rem;
+      height: 100%;
       margin-bottom: 15px;
     }
     label {
