@@ -10,7 +10,7 @@ const LandingPage = props => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-landing">
       <h2>Your Properties</h2>
       <p>Property info will go here</p>
       <div className="add-property" onClick={toggleShowPopup}>
