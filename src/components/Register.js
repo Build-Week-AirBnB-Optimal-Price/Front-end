@@ -19,7 +19,7 @@ const LoginForm = ({ values, errors, touched, status }) => {
     }, [status]);
 
     return (
-        <div className="login-form">
+        <div className="wrapper">
             <Form>
                 <Row>
                     <Col md={6}>
