@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import PopupPropertyInfoForm from "./PopupPropertyInfoForm";
 
-const LandingPage = props => {
+const PropertyPage = props => {
   const [showPopup, setShowPopup] = useState(false);
 
   const toggleShowPopup = e => {
@@ -28,5 +28,5 @@ const LandingPage = props => {
   );
 };
 
-export default LandingPage;
+export default PropertyPage;
 // src\assets\plus_sign.png
