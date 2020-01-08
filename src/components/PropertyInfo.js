@@ -22,7 +22,9 @@ export default function PropertyInfo(props) {
     return (
         <Container>
             <Row>
-                
+                <section className="property-list">
+                    
+                </section>
             </Row>
         </Container>
     )

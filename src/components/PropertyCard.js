@@ -1,14 +1,23 @@
 import React from 'react';
 
-const PropertyCard = () => {
+export default function PropertyCard(props) {
     return (
-        {/* 
-            This component displays property info about the selected property
-        */}
-
-        <div>
-            <h2>Property info</h2>
-        </div>
-
-    )
-}
+        <PropCard>
+            <PropBody>
+                <CharText>Host since: </CharText>
+                <CharText>Number of Bedrooms:</CharText>
+                <CharText>Number of Bathrooms:</CharText>
+                <CharText>Room Type:</CharText>
+                <CharText>Maximum Nights:</CharText>
+                <CharText>Minimum Nights:</CharText>
+                <CharText>Cost per Extra Person:</CharText>
+                <CharText>Accommodates:</CharText>
+                <CharText>Neighbourhood:</CharText>
+                <CharText>Number of Beds in Home:</CharText>
+                <CharText>Property Type:</CharText>
+                <CharText>Cancellation Policy:</CharText>
+                <CharText>Number of Guests Included:</CharText>
+            </PropBody>
+        </PropCard>
+    );
+};

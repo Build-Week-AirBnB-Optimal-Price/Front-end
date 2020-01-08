@@ -38,7 +38,16 @@ const Form = styled.form`
   }
 `;
 
-const PopupPropertyInfoForm = props => {
+const PopupPropertyInfoForm = (props) => {
+  const [property, setProperty] =useState();
+
+  const handleChanges = event => {
+    setProperty({...property, [event.target.name]: event.target.value})
+  };
+
+  const submitForm = event => {
+    event.preventDefault();
+  }
   return (
     <Popup className="popup">
       <Inner className="popup-inner">
