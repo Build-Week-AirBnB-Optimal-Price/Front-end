@@ -81,6 +81,21 @@ const LoginForm = ({ values, errors, touched, status }) => {
                             )}
                         </FormGroup>
                     </Col>
+                    <Col md={12}>
+                        <FormGroup>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                            />
+                            {touched.password && errors.password && (
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.password}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
                 </Row>
                 <Row>
                     <Col>
