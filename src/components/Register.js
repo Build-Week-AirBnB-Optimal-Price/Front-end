@@ -104,18 +104,23 @@ const RegisterForm = ({ values, errors, touched, status }) => {
                     </Button>
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col md={12}>
+                        {users.map(user => {
+                            return (
+                                <ul>
+                                    <li>First Name: {user.first_name}</li>
+                                    <li>Last Name: {user.last_name}</li>
+                                    <li>Email: {user.email}</li>
+                                    <li>Username: {user.username}</li>
+                                </ul>
+                            )
+                        })}
+                    </Col>
+                </Row>
             </Form>
 
-            {users.map(user => {
-                return (
-                    <ul>
-                        <li>First Name: {user.first_name}</li>
-                        <li>Last Name: {user.last_name}</li>
-                        <li>Email: {user.email}</li>
-                        <li>Username: {user.username}</li>
-                    </ul>
-                )
-            })}
         </div>
     )
 }
