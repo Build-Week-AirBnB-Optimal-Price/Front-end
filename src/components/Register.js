@@ -6,7 +6,7 @@ import {
 import * as Yup from "yup";
 import axios from "axios";
 
-const LoginForm = ({ values, errors, touched, status }) => {
+const RegisterForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
@@ -120,7 +120,7 @@ const LoginForm = ({ values, errors, touched, status }) => {
     )
 }
 
-const FormikLoginForm = withFormik({
+const FormikRegisterForm = withFormik({
     mapPropsToValues(props) {
         return {
             first_name: props.first_name || "",
@@ -147,6 +147,6 @@ const FormikLoginForm = withFormik({
             })
             .catch(err => console.log(err.res));
     }
-})(LoginForm);
+})(RegisterForm);
 
-export default FormikLoginForm;
+export default FormikRegisterForm;

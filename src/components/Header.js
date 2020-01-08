@@ -34,7 +34,7 @@ const Header = () => {
               <NavLink href="/properties">Your Properties</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://devindcooper.github.io/Marketing-page/#">About</NavLink>
+              <NavLink href="/about">About</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>

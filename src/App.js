@@ -17,7 +17,7 @@ function App() {
       <Header />
       <Route exact path="/" component={HomePage}></Route>
       <Route path="/properties" component={PropertyPage}></Route>
-      <Route path="https://devindcooper.github.io/Marketing-page/" component={About}></Route>
+      <Route path="/about" component={About}></Route>
       <Route path="/login" component={LoginForm}></Route>
       <Route path="/register" component={Register}></Route>
     </div>
