@@ -7,6 +7,7 @@ import Header from "./components/Header.js";
 import LandingPage from "./components/LandingPage.js";
 import LoginForm from "./components/LoginForm";
 import Register from "./components/Register";
+import AnalyzationForm from "./components/AnalyzationForm";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path="/properties" component={LandingPage}></Route>
       <Route path="/login" component={LoginForm}></Route>
       <Route path="/register" component={Register}></Route>
+      <Route path="/analyzation" component={AnalyzationForm}></Route>
     </div>
   );
 }
