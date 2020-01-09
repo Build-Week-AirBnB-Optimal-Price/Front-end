@@ -36,6 +36,7 @@
   align-items: center;
 }
 
+<<<<<<< HEAD
 .wrapper-landing {
   min-height: 50vh;
   display: flex;
@@ -43,3 +44,5 @@
   justify-content: center;
   align-items: center;
 }
+=======
+>>>>>>> dd9533bacd11fed30fa42f414277f37ddfcef4d2
