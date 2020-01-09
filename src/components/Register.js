@@ -6,7 +6,7 @@ import {
 import * as Yup from "yup";
 import axios from "axios";
 
-const LoginForm = ({ values, errors, touched, status }) => {
+const RegisterForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
@@ -19,7 +19,7 @@ const LoginForm = ({ values, errors, touched, status }) => {
     }, [status]);
 
     return (
-        <div className="login-form">
+        <div className="wrapper">
             <Form>
                 <Row>
                     <Col md={6}>
@@ -81,6 +81,21 @@ const LoginForm = ({ values, errors, touched, status }) => {
                             )}
                         </FormGroup>
                     </Col>
+                    <Col md={12}>
+                        <FormGroup>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                            />
+                            {touched.password && errors.password && (
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.password}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
                 </Row>
                 <Row>
                     <Col>
@@ -89,23 +104,28 @@ const LoginForm = ({ values, errors, touched, status }) => {
                     </Button>
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col md={12}>
+                        {users.map(user => {
+                            return (
+                                <ul>
+                                    <li>First Name: {user.first_name}</li>
+                                    <li>Last Name: {user.last_name}</li>
+                                    <li>Email: {user.email}</li>
+                                    <li>Username: {user.username}</li>
+                                </ul>
+                            )
+                        })}
+                    </Col>
+                </Row>
             </Form>
 
-            {users.map(user => {
-                return (
-                    <ul>
-                        <li>First Name: {user.first_name}</li>
-                        <li>Last Name: {user.last_name}</li>
-                        <li>Email: {user.email}</li>
-                        <li>Username: {user.username}</li>
-                    </ul>
-                )
-            })}
         </div>
     )
 }
 
-const FormikLoginForm = withFormik({
+const FormikRegisterForm = withFormik({
     mapPropsToValues(props) {
         return {
             first_name: props.first_name || "",
@@ -132,6 +152,6 @@ const FormikLoginForm = withFormik({
             })
             .catch(err => console.log(err.res));
     }
-})(LoginForm);
+})(RegisterForm);
 
-export default FormikLoginForm;
+export default FormikRegisterForm;

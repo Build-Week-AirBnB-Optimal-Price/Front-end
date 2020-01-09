@@ -3,7 +3,11 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const LoginForm = ({values, errors, touched, status}) => {
+import {
+    Alert, Col, Row, Button, FormGroup,
+} from 'reactstrap';
+
+const LoginForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
@@ -15,9 +19,9 @@ const LoginForm = ({values, errors, touched, status}) => {
         status && setUsers(users => [...users, status]);
     }, [status]);
 
-    return(
-        <div className="login-form">
-            <Form>
+    return (
+        <div className="wrapper">
+            {/* <Form>
                 <label htmlFor="username">
                     Username
                     <Field
@@ -25,10 +29,10 @@ const LoginForm = ({values, errors, touched, status}) => {
                         type="text"
                         name="username"
                         placeholder="Username"
-                        />
-                        {touched.username && errors.username && (
-                            <p className="errors">{errors.username}</p>
-                        )}
+                    />
+                    {touched.username && errors.username && (
+                        <p className="errors">{errors.username}</p>
+                    )}
                 </label>
                 <label htmlFor="password">
                     Password
@@ -37,14 +41,59 @@ const LoginForm = ({values, errors, touched, status}) => {
                         type="text"
                         name="password"
                         placeholder="Password"
-                        />
-                        {touched.password && errors.password && (
-                            <p className="errors">{errors.password}</p>
-                        )}
+                    />
+                    {touched.password && errors.password && (
+                        <p className="errors">{errors.password}</p>
+                    )}
                 </label>
+
                 <button type="submit">Submit</button>
+            </Form> */}
+            <Form>
+                <Row>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                            />
+                            {touched.username && errors.username && (
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.username}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                            />
+                            {touched.password && errors.password && (
+
+                                <Alert color="danger">
+                                    <p className="errors">{errors.password}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Button tpye="submit" outline color="success">
+                            Submit
+                    </Button>
+                    </Col>
+                </Row>
             </Form>
-        </div>
+
+
+
+        </div >
     )
 }
 
@@ -60,16 +109,16 @@ const FormikLoginForm = withFormik({
         password: Yup.string().required(),
     }),
 
-    handleSubmit(values, {setStatus, resetForm}) {
+    handleSubmit(values, { setStatus, resetForm }) {
         console.log("submitting", values);
         axios
-        .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
-        .then(res => {
-            console.log("success", res);
-            setStatus(res.data);
-            resetForm();
-        })
-        .catch(err => console.log(err.res));
+            .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
+            .then(res => {
+                console.log("success", res);
+                setStatus(res.data);
+                resetForm();
+            })
+            .catch(err => console.log(err.res));
     }
 })(LoginForm);
 
