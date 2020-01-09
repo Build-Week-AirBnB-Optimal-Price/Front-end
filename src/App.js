@@ -9,6 +9,7 @@ import PropertyPage from "./components/PropertyPage.js";
 import About from "./components/About.js";
 import LoginForm from "./components/LoginForm";
 import Register from "./components/Register";
+import AnalyzationForm from "./components/AnalyzationForm";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/about" component={About}></Route>
       <Route path="/login" component={LoginForm}></Route>
       <Route path="/register" component={Register}></Route>
+      <Route path="/analyzation" component={AnalyzationForm}></Route>
     </div>
   );
 }

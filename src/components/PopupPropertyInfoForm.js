@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Popup = styled.div`
@@ -38,7 +38,16 @@ const Form = styled.form`
   }
 `;
 
-const PopupPropertyInfoForm = props => {
+const PopupPropertyInfoForm = (props) => {
+  const [property, setProperty] =useState();
+
+  const handleChanges = event => {
+    setProperty({...property, [event.target.name]: event.target.value})
+  };
+
+  const submitForm = event => {
+    event.preventDefault();
+  }
   return (
     <Popup className="popup">
       <Inner className="popup-inner">
@@ -49,36 +58,34 @@ const PopupPropertyInfoForm = props => {
           your rental, and the more information we have, the better estimate we
           can make for you.
         </p>
-        <Form>
-          <label>Host since</label>
-          <input type="text"></input>
-          <label>Amenities</label>
-          <input type="text"></input>
-          <label>Number of Bedrooms</label>
-          <input type="text"></input>
-          <label>Number of Bathrooms</label>
-          <input type="text"></input>
-          <label>Room Type</label>
-          <input type="text"></input>
-          <label>Maximum Nights</label>
-          <input type="text"></input>
-          <label>Minimum Nights</label>
-          <input type="text"></input>
-          <label>Cost Per Extra Person</label>
-          <input type="text"></input>
-          <label>Accommodates</label>
-          <input type="text"></input>
-          <label>Neighbourhood</label>
-          <input type="text"></input>
-          <label>Number of Beds in Home</label>
-          <input type="text"></input>
-          <label>Property Type</label>
-          <input type="text"></input>
-          <label>Cancellation Policy</label>
-          <input type="text"></input>
-          <label>Number of Guests Included</label>
-          <input type="text"></input>
-          <button>Submit</button>
+        <Form onSubmit={submitForm}>
+          <label htmlFor="date">Host since</label>
+          <input id="date" type="text" name="date" onChange={handleChanges}></input>
+          <label htmlFor="bedrooms">Number of Bedrooms</label>
+          <input id="bedrooms" type="text" name="bedrooms" onChange={handleChanges}></input>
+          <label htmlFor="bathrooms">Number of Bathrooms</label>
+          <input id="bathrooms" type="text" name="bathrooms" onChange={handleChanges}></input>
+          <label htmlFor="roomType">Room Type</label>
+          <input id="roomType" type="text" name="roomtype" onChange={handleChanges}></input>
+          <label htmlFor="maxNights">Maximum Nights</label>
+          <input id="maxNights" type="text" name="maxNights" onChange={handleChanges}></input>
+          <label htmlFor="minNights">Minimum Nights</label>
+          <input id="minNights" type="text" name="minNights" onChange={handleChanges}></input>
+          <label htmlFor="cost">Cost Per Extra Person</label>
+          <input id="cost" type="text" name="cost" onChange={handleChanges}></input>
+          <label htmlFor="accommodates">Accommodates</label>
+          <input id="accommodates" type="text" name="accommodates" onChange={handleChanges}></input>
+          <label htmlFor="neighbourhood">Neighbourhood</label>
+          <input id="neighbourhood" type="text" name="neighbourhood" onChange={handleChanges}></input>
+          <label htmlFor="beds">Number of Beds in Home</label>
+          <input id="beds" type="text" name="beds" onChange={handleChanges}></input>
+          <label htmlFor="propertyType">Property Type</label>
+          <input id="propertyType" type="text" name="propertyType" onChange={handleChanges}></input>
+          <label htmlFor="cancellation">Cancellation Policy</label>
+          <input id="cancellation" type="text" name="cancellation" onChange={handleChanges}></input>
+          <label htmlFor="guests">Number of Guests Included</label>
+          <input id="guests" type="text" name="guests" onChange={handleChanges}></input>
+          <button type="submit">Submit</button>
         </Form>
       </Inner>
     </Popup>
