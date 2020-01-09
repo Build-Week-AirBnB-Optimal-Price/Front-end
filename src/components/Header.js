@@ -1,32 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+// import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 
-const Navbar = styled.nav`
-  width: 400px;
-`;
+// import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 
-const Navlist = styled.ul`
-  display: flex;
-  justify-content: space-between;
-`;
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink
+} from 'reactstrap';
+
 
 const Header = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
-      <Navbar>
-        <Navlist>
-          {/* I think the home and about need to be <a> tags because they are deployed separately.
-          Can cross that bridge later.*/}
-          <Link to="/">Home</Link>
-          <Link to="/properties">Your Properties</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </Navlist>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">Smart Home Prices</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink href="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/properties">Your Properties</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/about">About</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/login">Login</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/register">Register</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
       </Navbar>
     </div>
   );
-};
-
+}
 export default Header;
