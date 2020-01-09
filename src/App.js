@@ -21,7 +21,7 @@ function App() {
       <Route path="/about" component={About}></Route>
       <Route path="/login" component={LoginForm}></Route>
       <Route path="/register" component={Register}></Route>
-      <Route path="/analyzation" component={AnalyzationForm}></Route>
+      <Route path="/analysis" component={AnalyzationForm}></Route>
     </div>
   );
 }
