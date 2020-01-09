@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
-// import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
+//import { Nav, Navbar, Form, FormControl, Button } from 'reactstrap';
 
 import {
   Collapse,
@@ -41,6 +41,9 @@ const Header = () => {
             </NavItem>
             <NavItem>
               <NavLink href="/register">Register</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/analysis">Analysis Tool</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

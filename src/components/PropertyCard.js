@@ -4,6 +4,7 @@ export default function PropertyCard(props) {
     return (
         <PropCard>
             <PropBody>
+                <CharText>Optimal Price Range:</CharText>
                 <CharText>Host since: </CharText>
                 <CharText>Number of Bedrooms:</CharText>
                 <CharText>Number of Bathrooms:</CharText>

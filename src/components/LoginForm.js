@@ -116,6 +116,7 @@ const FormikLoginForm = withFormik({
             .then(res => {
                 console.log("success", res);
                 setStatus(res.data);
+                //update redux state inside this .then function
                 resetForm();
             })
             .catch(err => console.log(err.res));
