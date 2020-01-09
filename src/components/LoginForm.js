@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { withFormik, Form, Field } from "formik";
+import { withFormik, Form, Field, connect} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { login } from '../actions';
+import { connect as rconnect } from 'react-redux';
 
-const LoginForm = ({values, errors, touched, status}) => {
+
+
+
+const LoginForm = ( { login, values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
@@ -66,11 +71,18 @@ const FormikLoginForm = withFormik({
         .post("https://optimal-airbnb-pricing-api.herokuapp.com/login", values)
         .then(res => {
             console.log("success", res);
+            login(res.data.id)
+
             setStatus(res.data);
+            window.localStorage.setItem('token', res.data.token);
             resetForm();
         })
         .catch(err => console.log(err.res));
     }
 })(LoginForm);
 
-export default FormikLoginForm;
+// const rmapStateToProps = state => {
+//     return state;
+// }
+
+export default rconnect(null,{login})(FormikLoginForm);

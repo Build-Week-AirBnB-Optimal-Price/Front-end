@@ -6,12 +6,27 @@ const initialState = {
     loadingPage: false,
     properties: [],
     username: '',
-    userid: ''
-    }
+    id: 'TEST'
+    };
 
-    export const reducer = (state = initialState, action) => {
+    
+
+    const reducer = (state = initialState, action) => {
         switch (action.type) {
+            case actionTypes.LOGIN: 
+                return {
+                    ...state, 
+                    loggedIn: true,
+                    id: 'test2'
+                };
+
+            case actionTypes.ADD_PROPERTY:
+                return {
+                    ...state, properties: [...state.properties, action.payload]
+                };
             default: 
-            return state;
+                return state;
         }
-    }
+    };
+
+    export default reducer;

@@ -6,7 +6,7 @@ import {
 import * as Yup from "yup";
 import axios from "axios";
 
-const LoginForm = ({ values, errors, touched, status }) => {
+const RegisterForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
@@ -17,9 +17,8 @@ const LoginForm = ({ values, errors, touched, status }) => {
         console.log("Status has changed!", status);
         status && setUsers(users => [...users, status]);
     }, [status]);
-
     return (
-        <div className="login-form">
+        <div className="wrapper">
             <Form>
                 <Row>
                     <Col md={6}>
@@ -74,9 +73,22 @@ const LoginForm = ({ values, errors, touched, status }) => {
                                 placeholder="Username"
                             />
                             {touched.username && errors.username && (
-
                                 <Alert color="danger">
                                     <p className="errors">{errors.username}</p>
+                                </Alert>
+                            )}
+                        </FormGroup>
+                    </Col>
+                    <Col md={12}>
+                        <FormGroup>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                            />
+                            {touched.password && errors.password && (
+                                <Alert color="danger">
+                                    <p className="errors">{errors.password}</p>
                                 </Alert>
                             )}
                         </FormGroup>
@@ -91,21 +103,11 @@ const LoginForm = ({ values, errors, touched, status }) => {
                 </Row>
             </Form>
 
-            {users.map(user => {
-                return (
-                    <ul>
-                        <li>First Name: {user.first_name}</li>
-                        <li>Last Name: {user.last_name}</li>
-                        <li>Email: {user.email}</li>
-                        <li>Username: {user.username}</li>
-                    </ul>
-                )
-            })}
         </div>
     )
 }
 
-const FormikLoginForm = withFormik({
+const FormikRegisterForm = withFormik({
     mapPropsToValues(props) {
         return {
             first_name: props.first_name || "",
@@ -118,20 +120,24 @@ const FormikLoginForm = withFormik({
         first_name: Yup.string().required(),
         last_name: Yup.string().required(),
         email: Yup.string().required(),
-        username: Yup.string().required()
+        username: Yup.string().required(),
+        password: Yup.string().required()
     }),
 
     handleSubmit(values, { setStatus, resetForm }) {
-        console.log("submitting", values);
+        console.log("submitting: values=", values);
         axios
-            .post("https://reqres.in/api/users/", values)
+            .post("https://optimal-airbnb-pricing-api.herokuapp.com/register", values)
             .then(res => {
                 console.log("success", res);
-                setStatus(res.data);
+                // setStatus(res.data);
+                // nothing right?
                 resetForm();
             })
             .catch(err => console.log(err.res));
+        
     }
-})(LoginForm);
+})(RegisterForm);
 
-export default FormikLoginForm;
+export default FormikRegisterForm;
+

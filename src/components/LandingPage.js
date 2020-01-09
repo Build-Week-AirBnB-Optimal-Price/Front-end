@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import PopupPropertyInfoForm from "./PopupPropertyInfoForm";
+import {connect } from 'react-redux';
+
 
 const LandingPage = props => {
   const [showPopup, setShowPopup] = useState(false);
@@ -11,7 +13,7 @@ const LandingPage = props => {
 
   return (
     <div className="wrapper">
-      <h2>Your Properties</h2>
+      <h2>Welcome {props.id}! Your Properties</h2>
       <p>Property info will go here</p>
       <div className="add-property" onClick={toggleShowPopup}>
         <img
@@ -28,5 +30,9 @@ const LandingPage = props => {
   );
 };
 
-export default LandingPage;
-// src\assets\plus_sign.png
+
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default connect(mapStateToProps, {})(LandingPage);
