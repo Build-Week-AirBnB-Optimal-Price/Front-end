@@ -28,13 +28,13 @@ const Header = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/">Home</NavLink>
+              <NavLink href="https://build-week-airbnb-optimal-price.github.io/Marketing-page/index.html">Home</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/properties">Your Properties</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/about">About</NavLink>
+              <NavLink href="https://build-week-airbnb-optimal-price.github.io/Marketing-page/About.html#">About</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>
