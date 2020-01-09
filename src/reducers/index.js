@@ -17,7 +17,7 @@ const initialState = {
                 return {
                     ...state, 
                     loggedIn: true,
-                    id: 'test2'
+                    id: action.payload
                 };
 
             case actionTypes.ADD_PROPERTY:

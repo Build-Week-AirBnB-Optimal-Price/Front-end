@@ -12,8 +12,6 @@ import { login } from './actions'
 
 
 function App(props) {
-  props.login('david')
-  console.log(props)
   return (
     <div className="App">
       <Header />
