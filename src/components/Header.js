@@ -42,6 +42,9 @@ const Header = () => {
             <NavItem>
               <NavLink href="/register">Register</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/analysis">Analysis Tool</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
