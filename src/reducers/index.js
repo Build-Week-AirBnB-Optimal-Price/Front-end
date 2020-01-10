@@ -6,6 +6,7 @@ const initialState = {
     loadingPage: false,
     properties: [],
     username: '',
+    first_name: '',
     id: 'TEST'
     };
 
@@ -19,11 +20,22 @@ const initialState = {
                     loggedIn: true,
                     id: action.payload
                 };
+            case actionTypes.GET_PROPERTIES:
+                return {
+                    ...state,
+                    properties: [...state.properties, action.payload]
+                };
 
             case actionTypes.ADD_PROPERTY:
                 return {
                     ...state, properties: [...state.properties, action.payload]
                 };
+            case actionTypes.SET_USER:
+                return {
+                    ...state,
+                    username: action.payload.username,
+                    first_name: action.payload.first_name
+                }
             default: 
                 return state;
         }

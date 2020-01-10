@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 // import { withFormik, Form, Field, connect} from "formik";
 // import * as Yup from "yup";
 import axios from "axios";
-import { login } from '../actions';
+import { login, getUserInfo } from '../actions';
 // import { connect as rconnect } from 'react-redux';
-import {connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 
 const LoginForm = props => {
@@ -16,7 +16,7 @@ const LoginForm = props => {
 
 const handleSubmit = e => {
     e.preventDefault();
-    props.login(creds);
+    props.login(creds, getUserInfo)
 }
 
 const handleChange = event => {
@@ -57,7 +57,7 @@ const mapStateToProps = state => {
     return state;
 }
 
-export default connect(mapStateToProps, { login })(LoginForm);
+export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 
 // const LoginForm = ( { login, values, errors, touched, status }) => {
 //     console.log("values", values);

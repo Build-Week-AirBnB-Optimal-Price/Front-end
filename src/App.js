@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute.js'
 
 //components
 import Header from "./components/Header.js";
@@ -15,9 +16,15 @@ function App(props) {
   return (
     <div className="App">
       <Header />
-      <Route path="/properties" component={LandingPage}></Route>
-      <Route path="/login" render={props => <LoginForm {...props} login={props.login} />}></Route>
-      <Route path="/register" component={Register}></Route>
+      <Switch>
+        <Route path exact='/' render={() => <Redirect to='/login' />} />
+        <Route path="/login" render={props => <LoginForm {...props} login={props.login} />}></Route>
+        <Route path="/register" component={Register}></Route>
+  
+        <PrivateRoute path="/user/:id" component={LandingPage}></PrivateRoute>
+
+      </Switch>
+
     </div>
   );
 }
