@@ -2,60 +2,56 @@ import React, { useState, useEffect } from "react";
 // import { withFormik, Form, Field, connect} from "formik";
 // import * as Yup from "yup";
 import axios from "axios";
-import { login, getUserInfo } from '../actions';
+import { login, getUserInfo } from "../actions";
 // import { connect as rconnect } from 'react-redux';
-import { connect } from 'react-redux';
-
+import { connect } from "react-redux";
 
 const LoginForm = props => {
+  const [creds, setCreds] = useState({
+    username: "",
+    password: ""
+  });
 
-    const [creds, setCreds] = useState({
-        username: '',
-        password: ''
-    })
-
-const handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    props.login(creds, getUserInfo)
-}
+    props.login(creds, props.history.push);
+  };
 
-const handleChange = event => {
-    console.log(creds);
+  const handleChange = event => {
     setCreds({
-        ...creds,
-        [event.target.name]: event.target.value
-        })
-}
+      ...creds,
+      [event.target.name]: event.target.value
+    });
+  };
 
-return (
+  return (
     <div>
-        <form onSubmit={handleSubmit}>
-            <label></label>
-            <input 
-                type='text'
-                name='username'
-                placeholder='username'
-                value={creds.username}
-                onChange={handleChange}
-                >
-            </input>
-            <label>Password</label>
-            <input 
-                type='password'
-                name='password'
-                placeholder='password'
-                value={creds.password}
-                onChange={handleChange}>
-            </input>
-            <button>Submit</button>
-        </form>
+      <form onSubmit={handleSubmit}>
+        <label></label>
+        <input
+          type="text"
+          name="username"
+          placeholder="username"
+          value={creds.username}
+          onChange={handleChange}
+        ></input>
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          value={creds.password}
+          onChange={handleChange}
+        ></input>
+        <button>Submit</button>
+      </form>
     </div>
-);
-}
+  );
+};
 
 const mapStateToProps = state => {
-    return state;
-}
+  return state;
+};
 
 export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 

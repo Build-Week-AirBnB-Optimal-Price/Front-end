@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { data } from '../assets/data.js'
+import { data } from "../assets/data.js";
+import { connect } from "react-redux";
+import { axiosWithAuth } from "../components/AxiosWithAuth.js";
+import { updateProperties } from "../actions";
 
 const Popup = styled.div`
   width: 100%;
@@ -15,7 +18,7 @@ const Inner = styled.div`
   max-width: 600px;
   max-height: 600px;
   overflow: auto;
-  box-shadow: -2px 13px 33px -1px rgba(0,0,0,0.75);
+  box-shadow: -2px 13px 33px -1px rgba(0, 0, 0, 0.75);
   border-radius: 3px;
   margin: 0 auto;
   top: 15%;
@@ -40,35 +43,44 @@ const Form = styled.form`
 `;
 
 const PopupPropertyInfoForm = props => {
+  console.log("props ==> ", props);
 
   const randomProperty = {
-    nickname: 'coolhouse',
-    hostSince: '12/1/2018',
-    numberOfBedrooms: '2',
-    numberOfBathrooms: '2',
-    roomType: "Private room",
-    maxNights: '10',
-    minNights: '1',
-    costPerExtraPerson: '100',
-    accommodates: '3',
-    neighbourhood:'Lübars',
-    numberBedsInHome: '5',
-    propertyType: 'Apartment',
-    cancellationPolicy: 'flexible',
-    numberOfGuestsIncluded: '3'
-  }
+    name: "TheHaven",
+    host_since: "2001",
+    zipcode: "10010",
+    room_type: "Entirehome/apt",
+    maximum_nights: 10,
+    minimum_nights: 3,
+    extra_people: 2,
+    accomodates: 6,
+    neighbourhood: "Mitte",
+    beds: 5,
+    property_type: "Apartment",
+    cancellation_policy: "strict_14_with_grace_period",
+    guests_included: 4,
+    bedrooms: 3,
+    bathrooms: 2,
+    optimal_price: 0
+  };
 
-
-  const [propertyInfo, setPropertyInfo] = React.useState(randomProperty)
+  const [propertyInfo, setPropertyInfo] = React.useState(randomProperty);
 
   const handleChange = e => {
     setPropertyInfo({
       ...propertyInfo,
       [e.target.name]: e.target.value
-    })
-    console.log(propertyInfo);
+    });
+  };
 
-  }
+  const handleSubmit = e => {
+    e.preventDefault();
+    // post new prop to db
+    axiosWithAuth()
+      .post(`/user/${props.id}/properties`, propertyInfo)
+      .then(res => console.log("POST property => ", res))
+      .catch(err => console.log(err));
+  };
 
   return (
     <Popup className="popup">
@@ -80,79 +92,114 @@ const PopupPropertyInfoForm = props => {
           your rental, and the more information we have, the better estimate we
           can make for you.
         </p>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <label>Property Nickname</label>
-          <input 
-              type='text'
-              name='nickname'
-              value={props.nickname}
-              onChange={handleChange}
+          <input
+            type="text"
+            name="name"
+            value={props.name}
+            onChange={handleChange}
           ></input>
           <label>Host since</label>
-          <input type="text"
-              name='hostSince'
-              value={props.hostSince}
-              onChange={handleChange}></input>
+          <input
+            type="text"
+            name="host_since"
+            value={props.host_since}
+            onChange={handleChange}
+          ></input>
+          <label>Zip Code</label>
+          <input
+            type="text"
+            name="zipcode"
+            value={props.zipcode}
+            onChange={handleChange}
+          ></input>
           <label>Number of Bedrooms</label>
-          <input type="text"
-              name='numberOfBedrooms'
-              value={props.numberOfBedrooms}
-              onChange={handleChange}></input>
+          <input
+            type="text"
+            name="bedrooms"
+            value={props.bedrooms}
+            onChange={handleChange}
+          ></input>
           <label>Number of Bathrooms</label>
-          <input type="text"
-              name='numberOfBathrooms'
-              value={props.numberOfBathrooms}
-              onChange={handleChange}></input>
+          <input
+            type="text"
+            name="bathrooms"
+            value={props.bathrooms}
+            onChange={handleChange}
+          ></input>
           <label>Room Type</label>
-          <input type="text"
-            name='roomType'
-            value={props.roomType}
-            onChange={handleChange}></input>
+          <input
+            type="text"
+            name="room_type"
+            value={props.room_type}
+            onChange={handleChange}
+          ></input>
           <label>Maximum Nights</label>
-          <input type="text"
-            name='maxNights'
-            value={props.maxNights}
-            onChange={handleChange}></input>
+          <input
+            type="text"
+            name="max_nights"
+            value={props.max_nights}
+            onChange={handleChange}
+          ></input>
           <label>Minimum Nights</label>
-          <input type="text"
-          name='minNights'
-          value={props.minNights}
-          onChange={handleChange}></input>
-          <label>Cost Per Extra Person</label>
-          <input type="text"
-          name='costPerExtraPerson'
-          value={props.costPerExtraPerson}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="min_nights"
+            value={props.min_nights}
+            onChange={handleChange}
+          ></input>
+
+          <label>Extra People</label>
+          <input
+            type="text"
+            name="extra_people"
+            value={props.extra_people}
+            onChange={handleChange}
+          ></input>
+
           <label>Accommodates</label>
-          <input type="text"
-          name='accommodates'
-          value={props.accommodates}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="accommodates"
+            value={props.accommodates}
+            onChange={handleChange}
+          ></input>
           <label>Neighbourhood</label>
-          <input type="text"
-          name='neighbourhood'
-          value={props.neighbourhood}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="neighbourhood"
+            value={props.neighbourhood}
+            onChange={handleChange}
+          ></input>
           <label>Number of Beds in Home</label>
-          <input type="text"
-          name='numberOfBedsInHome'
-          value={props.numberOfBedsInHome}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="beds"
+            value={props.beds}
+            onChange={handleChange}
+          ></input>
           <label>Property Type</label>
-          <input type="text"
-          name='propertyType'
-          value={props.propertyType}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="property_type"
+            value={props.property_type}
+            onChange={handleChange}
+          ></input>
           <label>Cancellation Policy</label>
-          <input type="text"
-          name='cancellationPolicy'
-          value={props.cancellationPolicy}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="cancel_policy"
+            value={props.cancel_policy}
+            onChange={handleChange}
+          ></input>
           <label>Number of Guests Included</label>
-          <input type="text"
-          name='numberOfGuestsIncluded'
-          value={props.numberOfGuestsIncluded}
-          onChange={handleChange}></input>
+          <input
+            type="text"
+            name="guests"
+            value={props.guests}
+            onChange={handleChange}
+          ></input>
           <button>Submit</button>
         </Form>
       </Inner>
@@ -160,4 +207,10 @@ const PopupPropertyInfoForm = props => {
   );
 };
 
-export default PopupPropertyInfoForm;
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps, { updateProperties })(
+  PopupPropertyInfoForm
+);
