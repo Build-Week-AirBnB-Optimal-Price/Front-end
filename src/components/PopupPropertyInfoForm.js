@@ -229,7 +229,6 @@ const PopupPropertyInfoForm = props => {
             onChange={handleChange}
           ></input>
           <button>Submit</button>
-          >>>>>>> david-francis
         </Form>
       </Inner>
     </Popup>

@@ -6,7 +6,7 @@ import PrivateRoute from "./components/PrivateRoute.js";
 //components
 import Header from "./components/Header.js";
 import HomePage from "./components/HomePage.js";
-import PropertyPage from "./components/PropertyPage.js";
+import LandingPage from "./components/LandingPage.js";
 import About from "./components/About.js";
 import LoginForm from "./components/LoginForm";
 import Register from "./components/Register";

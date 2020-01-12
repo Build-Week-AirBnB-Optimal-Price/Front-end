@@ -15,15 +15,11 @@ const Container = styled.div`
   margin: auto auto;
 `;
 
-<<<<<<< HEAD:src/components/PropertyPage.js
-const PropertyPage = props => {
-=======
 const LandingPage = props => {
   if (!props.loggedIn) {
     props.logout();
   }
 
->>>>>>> david-francis:src/components/LandingPage.js
   const [showPopup, setShowPopup] = useState(false);
   const properties = props.properties;
 
@@ -54,16 +50,10 @@ const LandingPage = props => {
   }, []);
 
   return (
-<<<<<<< HEAD:src/components/PropertyPage.js
-    <div className="wrapper-landing">
-      <h2>Your Properties</h2>
-      <p>Property info will go here</p>
-=======
     <div className="wrapper">
       <h2>
         Welcome back, {props.first_name}! Your Properties are listed below.
       </h2>
->>>>>>> david-francis:src/components/LandingPage.js
       <div className="add-property" onClick={toggleShowPopup}>
         <img
           className="favicon"
@@ -94,10 +84,6 @@ const LandingPage = props => {
   );
 };
 
-<<<<<<< HEAD:src/components/PropertyPage.js
-export default PropertyPage;
-// src\assets\plus_sign.png
-=======
 const mapStateToProps = state => {
   return state;
 };
@@ -105,4 +91,3 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { setUser, updateProperties, logout })(
   LandingPage
 );
->>>>>>> david-francis:src/components/LandingPage.js
