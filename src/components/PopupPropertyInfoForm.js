@@ -43,9 +43,8 @@ const Form = styled.form`
 `;
 
 const PopupPropertyInfoForm = props => {
-  console.log("props ==> ", props);
-
   const randomProperty = {
+    // userID: props.id,
     name: "TheHaven",
     host_since: "2001",
     zipcode: "10010",
@@ -53,7 +52,7 @@ const PopupPropertyInfoForm = props => {
     maximum_nights: 10,
     minimum_nights: 3,
     extra_people: 2,
-    accomodates: 6,
+    accommodates: 6,
     neighbourhood: "Mitte",
     beds: 5,
     property_type: "Apartment",
@@ -64,7 +63,27 @@ const PopupPropertyInfoForm = props => {
     optimal_price: 0
   };
 
-  const [propertyInfo, setPropertyInfo] = React.useState(randomProperty);
+  const randomPropertyTwo = {
+    accommodates: 8,
+    bathrooms: 2,
+    bedrooms: 3,
+    beds: 5,
+    cancellation_policy: "moderate",
+    extra_people: 2,
+    guests_included: 3,
+    host_since: "2020-01-11T23:50:46.592+00:00",
+    // id: 1,
+    maximum_nights: 18,
+    minimum_nights: 3,
+    name: "Corner Cottage",
+    neighbourhood: "Schmöckwitz",
+    optimal_price: 200,
+    property_type: "Hostel",
+    room_type: "Entire home/apt",
+    zipcode: "10001"
+  };
+
+  const [propertyInfo, setPropertyInfo] = React.useState(randomPropertyTwo);
 
   const handleChange = e => {
     setPropertyInfo({
@@ -75,10 +94,20 @@ const PopupPropertyInfoForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log("ORIOERTY INFO: ", propertyInfo);
     // post new prop to db
     axiosWithAuth()
       .post(`/user/${props.id}/properties`, propertyInfo)
       .then(res => console.log("POST property => ", res))
+      .catch(err => console.log(err));
+
+    axiosWithAuth()
+      .get(`/user/${props.id}/properties`)
+      .then(res => {
+        //need to add call to update state with property info
+        console.log(".get res ==> ", res);
+        props.updateProperties(res.data.user_properties);
+      })
       .catch(err => console.log(err));
   };
 
@@ -138,15 +167,15 @@ const PopupPropertyInfoForm = props => {
           <label>Maximum Nights</label>
           <input
             type="text"
-            name="max_nights"
-            value={props.max_nights}
+            name="maximum_nights"
+            value={props.maximum_nights}
             onChange={handleChange}
           ></input>
           <label>Minimum Nights</label>
           <input
             type="text"
-            name="min_nights"
-            value={props.min_nights}
+            name="minimum_nights"
+            value={props.minimum_nights}
             onChange={handleChange}
           ></input>
 
@@ -189,15 +218,15 @@ const PopupPropertyInfoForm = props => {
           <label>Cancellation Policy</label>
           <input
             type="text"
-            name="cancel_policy"
-            value={props.cancel_policy}
+            name="cancellation_policy"
+            value={props.cancellation_policy}
             onChange={handleChange}
           ></input>
           <label>Number of Guests Included</label>
           <input
             type="text"
-            name="guests"
-            value={props.guests}
+            name="guests_included"
+            value={props.guests_included}
             onChange={handleChange}
           ></input>
           <button>Submit</button>

@@ -34,8 +34,6 @@ const Header = props => {
     <div>
       <Navbar>
         <Navlist>
-          {/* I think the home and about need to be <a> tags because they are deployed separately.
-        Can cross that bridge later.*/}
           <Link to="/">Home</Link>
           <Link to={`/user/${props.id}`}>Your Properties</Link>
           <Link to="/about">About Us</Link>
