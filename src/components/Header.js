@@ -1,54 +1,46 @@
-// import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { logout } from "../actions";
 
-// import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
-
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from 'reactstrap';
-
-
-const Header = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
-  return (
+const Header = props => {
+  return props.loggedIn ? (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Smart Home Prices</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="https://build-week-airbnb-optimal-price.github.io/Marketing-page/index.html">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/properties">Your Properties</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://build-week-airbnb-optimal-price.github.io/Marketing-page/About.html#">About</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/register">Register</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/analysis">Analysis Tool</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
+      <Navbar>
+        <Navlist>
+          {/* I think the home and about need to be <a> tags because they are deployed separately.
+          Can cross that bridge later.*/}
+          <Link to="https://build-week-airbnb-optimal-price.github.io/Marketing-page/index.html">
+            Home
+          </Link>
+          <Link to={`/user/${props.id}`}>Your Properties</Link>
+          <Link to="https://build-week-airbnb-optimal-price.github.io/Marketing-page/About.html#">
+            About Us
+          </Link>
+          <Link to="/login" onClick={props.logout}>
+            Logout
+          </Link>
+          <Link to="/register">Register</Link>
+        </Navlist>
+      </Navbar>
+    </div>
+  ) : (
+    <div>
+      <Navbar>
+        <Navlist>
+          <Link to="/">Home</Link>
+          <Link to={`/user/${props.id}`}>Your Properties</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </Navlist>
       </Navbar>
     </div>
   );
-}
-export default Header;
+};
+
+const mapStateToProps = state => {
+  return state;
+};
+export default connect(mapStateToProps, { logout })(Header);
