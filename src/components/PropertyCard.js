@@ -80,7 +80,10 @@ const PropertyCard = props => {
         `https://optimal-airbnb-pricing-api.herokuapp.com/optimalprice`,
         propToSend
       )
-      .then(res => console.log("RES => ", res.data.results))
+      .then(res => {
+        console.log("RES => ", res.data.results);
+        alert(`The optimal price is $${res.data.results} a night.`);
+      })
       .catch(err => console.log(err));
   };
 
@@ -93,7 +96,8 @@ const PropertyCard = props => {
         <p onClick={deleteProperty}>(-) Delete Property</p>
       </PlusMinus>
       <div onClick={getOptimalPrice}>
-        Optimal Price is ${props.property.optimal_price}. (Click to update)
+        {/* Optimal Price is ${props.property.optimal_price}.  */}
+        (Click to get optimal price)
       </div>
     </Card>
   );
