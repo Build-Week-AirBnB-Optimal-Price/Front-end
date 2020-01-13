@@ -5,7 +5,19 @@ import {
 } from 'reactstrap';
 import * as Yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
 
+const RegisterDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`
+
+const RegisterTitle = styled.div`
+    font-size: 2rem;
+    padding: 2%;
+`
 const RegisterForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
     console.log("errors", errors);
@@ -19,7 +31,8 @@ const RegisterForm = ({ values, errors, touched, status }) => {
     }, [status]);
 
     return (
-        <div className="wrapper">
+        <RegisterDiv className="wrapper">
+            <RegisterTitle>Register</RegisterTitle>
             <Form>
                 <Row>
                     <Col md={6}>
@@ -121,7 +134,7 @@ const RegisterForm = ({ values, errors, touched, status }) => {
                 </Row>
             </Form>
 
-        </div>
+        </RegisterDiv>
     )
 }
 

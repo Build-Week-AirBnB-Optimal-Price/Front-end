@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
+import styled from "styled-components";
 import * as Yup from "yup";
 import axios from "axios";
 
 import {
     Alert, Col, Row, Button, FormGroup,
 } from 'reactstrap';
+
+const LoginDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`
+
+const LoginTitle = styled.div`
+    font-size: 2rem;
+    padding: 2%;
+`
 
 const LoginForm = ({ values, errors, touched, status }) => {
     console.log("values", values);
@@ -20,7 +33,8 @@ const LoginForm = ({ values, errors, touched, status }) => {
     }, [status]);
 
     return (
-        <div className="wrapper">
+        <LoginDiv className="wrapper">
+            <LoginTitle>Login</LoginTitle>
             {/* <Form>
                 <label htmlFor="username">
                     Username
@@ -93,7 +107,7 @@ const LoginForm = ({ values, errors, touched, status }) => {
 
 
 
-        </div >
+        </LoginDiv >
     )
 }
 
