@@ -30,7 +30,7 @@ const Header = props => {
       <Link to={`/user/${props.id}`}>Your Properties</Link>
       <a href="https://build-week-airbnb-optimal-price.github.io/Marketing-page/About.html#">
         About Us
-      </a>{" "}
+      </a>
       <Link to="/login">Login</Link>
       <Link to="/register">Register</Link>
       <Link to={`/user/${props.id}/analysis`}>Rental Description Analyzer</Link>
