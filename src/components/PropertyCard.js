@@ -67,8 +67,7 @@ const PropertyCard = props => {
 
   const deleteProperty = async e => {
     await props.deleteProperty(props.userid, props.propertyid);
-    updateProperties(props.properties);
-    console.log(props.properties);
+    props.updateProperties(props.userid);
   };
 
   const getOptimalPrice = e => {

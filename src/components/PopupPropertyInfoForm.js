@@ -94,21 +94,20 @@ const PopupPropertyInfoForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("ORIOERTY INFO: ", propertyInfo);
     // post new prop to db
     axiosWithAuth()
       .post(`/user/${props.id}/properties`, propertyInfo)
-      .then(res => console.log("POST property => ", res))
+      .then(res => props.updateProperties(props.id))
       .catch(err => console.log(err));
 
-    axiosWithAuth()
-      .get(`/user/${props.id}/properties`)
-      .then(res => {
-        //need to add call to update state with property info
-        console.log(".get res ==> ", res);
-        props.updateProperties(res.data.user_properties);
-      })
-      .catch(err => console.log(err));
+    // axiosWithAuth()
+    // .get(`/user/${props.id}/properties`)
+    // .then(res => {
+    //   //need to add call to update state with property info
+    //   console.log(".get res ==> ", res);
+    //   props.updateProperties(props.id);
+    // })
+    // .catch(err => console.log(err));
   };
 
   return (

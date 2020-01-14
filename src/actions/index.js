@@ -55,12 +55,15 @@ export const setUser = user => dispatch => {
   dispatch({ type: SET_USER, payload: user });
 };
 
-export const updateProperties = properties => dispatch => {
-  console.log(
-    "properties property from actions -> updateProperties(property)",
-    properties
-  );
-  dispatch({ type: UPDATE_PROPERTIES, payload: properties });
+// add axios call here, and pass userid instead of properties
+export const updateProperties = userid => dispatch => {
+  axiosWithAuth()
+    .get(`/user/${userid}/properties`)
+    .then(res => {
+      //need to add call to update state with property info
+      dispatch({ type: UPDATE_PROPERTIES, payload: res.data.user_properties });
+    })
+    .catch(err => console.log(err));
 };
 
 export const deleteProperty = (userid, propertyid) => dispatch => {

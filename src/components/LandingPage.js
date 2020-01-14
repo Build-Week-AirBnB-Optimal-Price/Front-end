@@ -27,9 +27,9 @@ const LandingPage = props => {
     setShowPopup(!showPopup);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     // get and set user-id
-    axiosWithAuth()
+    await axiosWithAuth()
       .get(`/user/${props.id}`)
       .then(res => {
         console.log(res);
@@ -38,15 +38,17 @@ const LandingPage = props => {
       })
       .catch(err => console.log(err));
 
+    props.updateProperties(props.id);
+
     //get and set properties
-    axiosWithAuth()
-      .get(`/user/${props.id}/properties`)
-      .then(res => {
-        //need to add call to update state with property info
-        console.log(".get res ==> ", res);
-        props.updateProperties(res.data.user_properties);
-      })
-      .catch(err => console.log(err));
+    // axiosWithAuth()
+    //   .get(`/user/${props.id}/properties`)
+    //   .then(res => {
+    //     //need to add call to update state with property info
+    //     console.log(".get res ==> ", res);
+    //     props.updateProperties(res.data.user_properties);
+    //   })
+    //   .catch(err => console.log(err));
   }, []);
 
   return (
