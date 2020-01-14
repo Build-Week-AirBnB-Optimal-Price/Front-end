@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { withFormik, Form, Field, connect} from "formik";
-// import * as Yup from "yup";
+
 import axios from "axios";
 import { login, getUserInfo } from "../actions";
 // import { connect as rconnect } from 'react-redux';
@@ -11,11 +10,6 @@ const LoginForm = props => {
     username: "",
     password: ""
   });
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.login(creds, props.history.push);
-  };
 
   const handleChange = event => {
     setCreds({
@@ -49,9 +43,6 @@ const LoginForm = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return state;
-};
 
 export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 
@@ -100,17 +91,6 @@ export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 //     )
 // }
 
-// const FormikLoginForm = withFormik({
-//     mapPropsToValues(props) {
-//         return {
-//             username: props.username || "",
-//             password: props.password || "",
-//         };
-//     },
-//     validationSchema: Yup.object().shape({
-//         username: Yup.string().required(),
-//         password: Yup.string().required(),
-//     }),
 
 //     handleSubmit(values, {setStatus, resetForm}) {
 //         console.log("submitting", values);

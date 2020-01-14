@@ -3,7 +3,19 @@ import { withFormik, Form, Field } from "formik";
 import { Alert, Col, Row, Button, FormGroup } from "reactstrap";
 import * as Yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
 
+const RegisterDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`
+
+const RegisterTitle = styled.div`
+    font-size: 2rem;
+    padding: 2%;
+`
 const RegisterForm = ({ values, errors, touched, status }) => {
   console.log("values", values);
   console.log("errors", errors);
@@ -80,24 +92,6 @@ const RegisterForm = ({ values, errors, touched, status }) => {
           </Col>
         </Row>
 
-        <Row>
-          <Col md={12}>
-            {users.map(user => {
-              return (
-                <ul>
-                  <li>First Name: {user.first_name}</li>
-                  <li>Last Name: {user.last_name}</li>
-                  <li>Email: {user.email}</li>
-                  <li>Username: {user.username}</li>
-                </ul>
-              );
-            })}
-          </Col>
-        </Row>
-      </Form>
-    </div>
-  );
-};
 
 const FormikRegisterForm = withFormik({
   mapPropsToValues(props) {
