@@ -30,7 +30,10 @@ function App(props) {
           render={props => <LoginForm {...props} login={props.login} />}
         ></Route>
         <Route path="/register" component={Register}></Route>
-        <Route path="/analysis" component={AnalyzationForm}></Route>
+        <PrivateRoute
+          path="/user/:id/analysis"
+          component={AnalyzationForm}
+        ></PrivateRoute>
 
         <PrivateRoute path="/user/:id" component={LandingPage}></PrivateRoute>
         <PrivateRoute path="/user/:id/:propertyid" component={PropertyInfo} />

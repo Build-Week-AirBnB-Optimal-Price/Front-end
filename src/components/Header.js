@@ -20,6 +20,7 @@ const Header = props => {
         Logout
       </Link>
       <Link to="/register">Register</Link>
+      <Link to={`/user/${props.id}/analysis`}>Rental Description Analyzer</Link>
     </div>
   ) : (
     <div>
@@ -32,6 +33,7 @@ const Header = props => {
       </a>{" "}
       <Link to="/login">Login</Link>
       <Link to="/register">Register</Link>
+      <Link to={`/user/${props.id}/analysis`}>Rental Description Analyzer</Link>
     </div>
   );
 };

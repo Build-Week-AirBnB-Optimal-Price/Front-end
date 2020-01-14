@@ -11,6 +11,11 @@ const LoginForm = props => {
     password: ""
   });
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.login(creds, props.history.push);
+  };
+
   const handleChange = event => {
     setCreds({
       ...creds,
@@ -43,6 +48,9 @@ const LoginForm = props => {
   );
 };
 
+const mapStateToProps = state => {
+  return state;
+};
 
 export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 
@@ -90,7 +98,6 @@ export default connect(mapStateToProps, { login, getUserInfo })(LoginForm);
 //         </div>
 //     )
 // }
-
 
 //     handleSubmit(values, {setStatus, resetForm}) {
 //         console.log("submitting", values);
