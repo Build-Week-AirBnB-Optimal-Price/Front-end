@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import PropertyCard from "./PropertyCard";
-import { Container, Row } from 'reactstrap';
+import React from "react";
+import { connect } from "react-redux";
 
-export default function PropertyInfo(props) {
+const PropertyInfo = props => {
+  return (
+    <div>
+      <h3>Go Back</h3>
+      <h3>Property Name</h3>
+      <p>Address</p>
+      <p>Beds</p>
+      <p>Baths</p>
+    </div>
+  );
+};
 
-    const [property, setProperty] = useState([])
-
-    useEffect(() => {
-        axios
-        .get('')
-        .then(res => {
-            console.log(res.data.results);
-            setProperty(res.data.results);
-            console.log(property);
-        })
-        .catch(error => {
-            console.error('Server Error', error);
-        })
-    }, []);
-    return (
-        <Container>
-            <Row>
-                <section className="property-list">
-                    
-                </section>
-            </Row>
-        </Container>
-    )
-}
+export default PropertyInfo;
